@@ -4,7 +4,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, position, groups, collision_sprites):
         super().__init__(groups)
         self.image = pygame.image.load("pics/drill.png").convert_alpha()
-        self.image = pygame.transform.scale(self.image, (100,100))
+        self.image = pygame.transform.scale(self.image, (50,50))
         self.rect = self.image.get_rect(center = position)
         self.hitbox_rect = self.rect.inflate(-20,0)
 
@@ -13,21 +13,36 @@ class Player(pygame.sprite.Sprite):
         self.speed = 500
         self.collision_sprites = collision_sprites
 
+        self.dig_cooldown = 500
+        self.press = True
+        self.level = 1
+
+        self.fuel = 100
+        self.fuel_rate = 5 - self.level
+
     def input(self):
         keys = pygame.key.get_pressed()
         self.direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
         self.direction.y = int(keys[pygame.K_DOWN]) - int(keys[pygame.K_UP])
         self.direction = self.direction.normalize() if self.direction else self.direction
 
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE] and self.press:
             self.dig()
+            self.press = False
+        elif not keys[pygame.K_SPACE]:
+            self.press = True
 
     def dig(self):
-        # Check for nearby diggable blocks
+        self.stack = 0
         for sprite in self.collision_sprites:
-            if sprite.is_diggable and sprite.rect.colliderect(self.hitbox_rect.inflate(20, 20)):
-                sprite.kill()  
-
+            if (
+                sprite.is_diggable 
+                and  
+                sprite.rect.colliderect(self.hitbox_rect.inflate(100, 20)) 
+            ):
+                if self.fuel > 0:
+                    sprite.take_damage()
+                    
 
     def move(self, dt):
         self.hitbox_rect.x += self.direction.x * self.speed * dt

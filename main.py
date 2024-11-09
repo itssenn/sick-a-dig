@@ -19,21 +19,21 @@ collision_sprites = pygame.sprite.Group()
 all_sprites = Allsprites()
 
 def setup():
-    map = load_pygame("maps/map.tmx")
+    map = load_pygame("maps/map.tmx") 
 
     for x, y, image in map.get_layer_by_name("sky").tiles():
         Sprite((x * TILE_SIZE ,y * TILE_SIZE),image, all_sprites)
-    for x, y, image in map.get_layer_by_name("ground").tiles():
-        CollisionSprite((x * TILE_SIZE ,y * TILE_SIZE),image, (all_sprites, collision_sprites), is_diggable=True)
+    for x, y, image in map.get_layer_by_name("dirt").tiles():
+        Block((x * TILE_SIZE ,y * TILE_SIZE),image, (all_sprites, collision_sprites),'dirt' ,is_diggable=True)
+    for x, y, image in map.get_layer_by_name("stone").tiles():
+        Block((x * TILE_SIZE ,y * TILE_SIZE),image, (all_sprites, collision_sprites),'stone' ,is_diggable=True)
+    for x, y, image in map.get_layer_by_name("ore").tiles():
+        Block((x * TILE_SIZE ,y * TILE_SIZE),image, (all_sprites, collision_sprites),'ore' ,is_diggable=True)
     
-    # for x, y, image in map.get_layer_by_name("ground").tiles():
-    #     CollisionSprite((x * TILE_SIZE ,y * TILE_SIZE),image, (all_sprites, collision_sprites))
-
-        
 
 setup()
 
-#Sprite
+#Sprite 
 player = Player((sc_w/2,sc_h/3), all_sprites, collision_sprites)
 
 

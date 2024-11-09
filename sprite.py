@@ -7,26 +7,25 @@ class Sprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = position)
 
 class CollisionSprite(pygame.sprite.Sprite):
-    def __init__(self, position, surf, groups, is_diggable=False):
+    def __init__(self, position, surf, groups):
         super().__init__(groups)
         self.image = surf
         self.rect = self.image.get_rect(topleft = position)
-        self.is_diggable = is_diggable 
 
-class Digger(pygame.sprite.Sprite):
-    def __init__(self, surf, pos, direction, groups):
+class Block(pygame.sprite.Sprite):
+    def __init__(self, position, surf, groups, block_name, is_diggable=False):
         super().__init__(groups)
-        self. image = surf
-        self.rect = self.image.get_rect(center = pos)
+        self.image = surf
+        self.rect = self.image.get_rect(topleft = position)
+        self.is_diggable = is_diggable
 
-class Dirt(pygame.sprite.Sprite):
-    def __init__(self, pos, frames, groups, player, collision_sprites):
-        super().__init__(groups)
-        self.player = player
+        self.Ore = {'dirt':1, 'stone':3, 'ore':4}
 
-        self.frames, self.frame_index = frames, 0  
+        self.block_health = self.Ore[block_name]
 
-        self.rect = self.image.get_rect(center = pos)
-        self.hitbox_rect = self.rect.inflate(-20, -40)
-        self.colision_sprites = collision_sprites
-        self.direction = pygame.Vector2()
+    def take_damage(self):
+        if self.is_diggable:
+            self.block_health -= 1
+            
+            if self.block_health <= 0:
+                self.kill()
