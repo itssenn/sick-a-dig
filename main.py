@@ -2,7 +2,7 @@ import pygame
 from setting import *
 from player import Player
 from sprite import *
-from pytmx.util_pygame import load_pygame
+from pytmx.util_pygame import load_pygame, pytmx
 from groups import Allsprites
 
 from random import randint
@@ -20,22 +20,30 @@ all_sprites = Allsprites()
 
 def setup():
     map = load_pygame("maps/map.tmx") 
-
-    for x, y, image in map.get_layer_by_name("sky").tiles():
-        Sprite((x * TILE_SIZE ,y * TILE_SIZE),image, all_sprites)
-    for x, y, image in map.get_layer_by_name("dirt").tiles():
-        Block((x * TILE_SIZE ,y * TILE_SIZE),image, (all_sprites, collision_sprites),'dirt' ,is_diggable=True)
-    for x, y, image in map.get_layer_by_name("stone").tiles():
-        Block((x * TILE_SIZE ,y * TILE_SIZE),image, (all_sprites, collision_sprites),'stone' ,is_diggable=True)
-    for x, y, image in map.get_layer_by_name("ore").tiles():
-        Block((x * TILE_SIZE ,y * TILE_SIZE),image, (all_sprites, collision_sprites),'ore' ,is_diggable=True)
     
+    for x, y, image in map.get_layer_by_name("bg").tiles():
+        Sprite((x * TILE_SIZE ,y * TILE_SIZE), image, all_sprites)
+
+    for x, y, image in map.get_layer_by_name("ground").tiles():
+        tile_properties = map.get_tile_properties(x, y, 1)  
+        ore_type = tile_properties.get("name") if tile_properties else None  
+        if ore_type:
+            Block(
+                (x * TILE_SIZE, y * TILE_SIZE), 
+                image, 
+                (all_sprites, collision_sprites), 
+                ore_type=ore_type, is_diggable=True
+            )
+
+    for obj in map.get_layer_by_name('obj'):
+        print(obj.x)
+        print(obj.y)
+        print(obj.image) 
 
 setup()
 
 #Sprite 
-player = Player((sc_w/2,sc_h/3), all_sprites, collision_sprites)
-
+player = Player((sc_w/2,sc_h/3), all_sprites, collision_sprites) 
 
 while running:
     

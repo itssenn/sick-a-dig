@@ -1,0 +1,50 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "/Users/nattanantsaengpattanakornkit/Desktop/test/data/Object/obj.tsx": {
+            "dynamicWrapping": true,
+            "scaleInEditor": 0.44
+        },
+        "block.tsx": {
+            "dynamicWrapping": false,
+            "scaleInEditor": 0.44
+        },
+        "diggame.tmx": {
+            "scale": 0.1921,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1015.0963040083291,
+                "y": 1759.5002602811037
+            }
+        },
+        "tiles.tsx": {
+            "dynamicWrapping": false
+        }
+    },
+    "last.exportedFilePath": "/Users/nattanantsaengpattanakornkit/Desktop/test/maps",
+    "last.imagePath": "/Users/nattanantsaengpattanakornkit/Desktop/test/data/Object",
+    "map.height": 50,
+    "map.lastUsedExportFilter": "Tiled map files (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "openFiles": [
+    ],
+    "project": "map.tiled-project",
+    "recentFiles": [
+        "block.tsx",
+        "/Users/nattanantsaengpattanakornkit/Desktop/test/data/Object/obj.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    },
+    "tileset.type": 0
+}

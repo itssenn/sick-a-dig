@@ -20,6 +20,8 @@ class Player(pygame.sprite.Sprite):
         self.fuel = 100
         self.fuel_rate = 5 - self.level
 
+        self.inventory = {}
+
     def input(self):
         keys = pygame.key.get_pressed()
         self.direction.x = int(keys[pygame.K_RIGHT]) - int(keys[pygame.K_LEFT])
@@ -38,12 +40,26 @@ class Player(pygame.sprite.Sprite):
             if (
                 sprite.is_diggable 
                 and  
-                sprite.rect.colliderect(self.hitbox_rect.inflate(100, 20)) 
+                sprite.rect.colliderect(self.hitbox_rect.inflate(5, 20)) 
             ):
-                if self.fuel > 0:
-                    sprite.take_damage()
-                    
+                if sprite.ore_type:
+                    if sum(list(self.inventory.values())) <= 30:
+                        if sprite.take_damage():
+                            if sprite.ore_type in self.inventory:
+                                self.inventory[sprite.ore_type] += 1
+                            else:
+                                self.inventory[sprite.ore_type] = 1
 
+                        print(self.inventory)
+                    else:
+                        print('Inventory is full!')
+
+
+                # if self.fuel > 0:
+                #     sprite.take_damage()
+                #     self.fuel -= 1
+                #     print(self.fuel)
+                    
     def move(self, dt):
         self.hitbox_rect.x += self.direction.x * self.speed * dt
         self.collision('horizontal')
