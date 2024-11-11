@@ -8,7 +8,7 @@ from groups import Allsprites
 from random import randint
 
 pygame.init()
-
+  
 running = True
 display_surface = pygame.display.set_mode((sc_w, sc_h))
 pygame.display.set_caption("Dig")
@@ -20,7 +20,7 @@ all_sprites = Allsprites()
 
 def setup():
     map = load_pygame("maps/map.tmx") 
-    
+
     for x, y, image in map.get_layer_by_name("bg").tiles():
         Sprite((x * TILE_SIZE ,y * TILE_SIZE), image, all_sprites)
 
@@ -34,12 +34,13 @@ def setup():
                 (all_sprites, collision_sprites), 
                 ore_type=ore_type, is_diggable=True
             )
-
-    for obj in map.get_layer_by_name('obj'):
-        print(obj.x)
-        print(obj.y)
-        print(obj.image) 
-
+          
+    # for obj in map.get_layer_by_name('obj'):
+    #     CollisionSprite((obj.x ,obj.y), obj.image, (all_sprites, collision_sprites))
+    #     print(obj.x)
+    #     print(obj.y) 
+    #     print(obj.image)
+        
 setup()
 
 #Sprite 

@@ -16,11 +16,11 @@
             "scaleInEditor": 0.44
         },
         "diggame.tmx": {
-            "scale": 0.1921,
-            "selectedLayer": 1,
+            "scale": 0.23,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1015.0963040083291,
-                "y": 1759.5002602811037
+                "x": 978.2608695652174,
+                "y": 895.6521739130433
             }
         },
         "tiles.tsx": {
@@ -37,6 +37,7 @@
     "openFiles": [
     ],
     "project": "map.tiled-project",
+    "property.type": "object",
     "recentFiles": [
         "block.tsx",
         "/Users/nattanantsaengpattanakornkit/Desktop/test/data/Object/obj.tsx"
@@ -46,5 +47,5 @@
         "height": 64,
         "width": 64
     },
-    "tileset.type": 0
+    "tileset.type": 1
 }
