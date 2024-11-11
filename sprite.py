@@ -10,6 +10,7 @@ class CollisionSprite(pygame.sprite.Sprite):
     def __init__(self, position, surf, groups):
         super().__init__(groups)
         self.image = surf
+        self.is_diggable = False
         self.rect = self.image.get_rect(topleft = position)
 
 class Block(pygame.sprite.Sprite):
@@ -32,3 +33,4 @@ class Block(pygame.sprite.Sprite):
             if self.block_health <= 0:
                 self.kill()
                 return True
+            

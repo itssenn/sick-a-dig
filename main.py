@@ -21,10 +21,10 @@ all_sprites = Allsprites()
 def setup():
     map = load_pygame("maps/map.tmx") 
 
-    for x, y, image in map.get_layer_by_name("bg").tiles():
+    for x, y, image in map.get_layer_by_name("sky").tiles():
         Sprite((x * TILE_SIZE ,y * TILE_SIZE), image, all_sprites)
 
-    for x, y, image in map.get_layer_by_name("ground").tiles():
+    for x, y, image in map.get_layer_by_name("block").tiles():
         tile_properties = map.get_tile_properties(x, y, 1)  
         ore_type = tile_properties.get("name") if tile_properties else None  
         if ore_type:
@@ -35,11 +35,11 @@ def setup():
                 ore_type=ore_type, is_diggable=True
             )
           
-    # for obj in map.get_layer_by_name('obj'):
-    #     CollisionSprite((obj.x ,obj.y), obj.image, (all_sprites, collision_sprites))
-    #     print(obj.x)
-    #     print(obj.y) 
-    #     print(obj.image)
+    for obj in map.get_layer_by_name('obj'):
+        CollisionSprite((obj.x ,obj.y), obj.image, (all_sprites, collision_sprites))
+        # print(obj.x)
+        # print(obj.y)
+        # print(obj.image)
         
 setup()
 

@@ -1,0 +1,36 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "/Users/nattanantsaengpattanakornkit/Desktop/test/data/Object/DigObject.tsx": {
+            "dynamicWrapping": true
+        },
+        "/Users/nattanantsaengpattanakornkit/Desktop/test/data/tileset/blocktileset.tsx": {
+            "dynamicWrapping": false
+        }
+    },
+    "last.exportedFilePath": "/Users/nattanantsaengpattanakornkit/Desktop/test/maps",
+    "last.imagePath": "/Users/nattanantsaengpattanakornkit/Desktop/test/data/Object",
+    "map.height": 50,
+    "map.lastUsedExportFilter": "Tiled map files (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 64,
+    "map.tileWidth": 64,
+    "map.width": 50,
+    "openFiles": [
+    ],
+    "project": "newmap.tiled-project",
+    "recentFiles": [
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    },
+    "tileset.type": 1
+}
