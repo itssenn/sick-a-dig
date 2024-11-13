@@ -5,6 +5,10 @@ class Sprite(pygame.sprite.Sprite):
         super().__init__(groups)
         self.image = surf
         self.rect = self.image.get_rect(topleft = position)
+    def interactable(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_e]:
+            print('interacted')
 
 class CollisionSprite(pygame.sprite.Sprite):
     def __init__(self, position, surf, groups):
@@ -26,9 +30,9 @@ class Block(pygame.sprite.Sprite):
 
         self.block_health = self.Ore[self.ore_type]
 
-    def take_damage(self):
+    def take_damage(self,multiplier):
         if self.is_diggable:
-            self.block_health -= 1
+            self.block_health -= 1 * multiplier
 
             if self.block_health <= 0:
                 self.kill()
