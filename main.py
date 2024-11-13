@@ -1,10 +1,11 @@
 import pygame
+import time
+
 from setting import *
 from player import Player
 from sprite import *
 from pytmx.util_pygame import load_pygame, pytmx
 from groups import Allsprites
-
 from random import randint
 
 pygame.init()
@@ -19,7 +20,7 @@ collision_sprites = pygame.sprite.Group()
 all_sprites = Allsprites()
 
 def setup():
-    map = load_pygame("maps/map.tmx") 
+    map = load_pygame("maps/map.tmx")
 
     for x, y, image in map.get_layer_by_name("sky").tiles():
         Sprite((x * TILE_SIZE ,y * TILE_SIZE), image, all_sprites)
@@ -36,12 +37,31 @@ def setup():
             )
           
     for obj in map.get_layer_by_name('obj'):
-        CollisionSprite((obj.x ,obj.y), obj.image, (all_sprites, collision_sprites))
-        # print(obj.x)
-        # print(obj.y)
-        # print(obj.image)
+        Sprite((obj.x ,obj.y), obj.image, all_sprites)
         
 setup()
+
+def draw_ui():
+    font = pygame.font.Font(None, 74)
+
+    text = font.render(f'Fuel: {player.fuel}', True, (255, 255, 255))
+    text_rect = text.get_rect(center=(sc_w / 2, sc_h - 50))
+    display_surface.blit(text, text_rect)
+
+    text = font.render(f'Coin: {player.coin}', True, (255, 255, 255))
+    text_rect = text.get_rect(center=(sc_w / 2, sc_h - 100))
+    display_surface.blit(text, text_rect)
+
+    text = font.render(f'{sum(list(player.inventory.values()))} / {player.max_inventory}', True, (255, 255, 255))
+    text_rect = text.get_rect(center=(sc_w / 2, sc_h - 150))
+    display_surface.blit(text, text_rect)
+
+    if player.fuel <= 0:
+        text = font.render('Fuel is empty!', True, (255, 255, 255))
+        text_rect = text.get_rect(center=(sc_w / 2, sc_h / 5))
+        display_surface.blit(text, text_rect)
+    
+    
 
 #Sprite 
 player = Player((sc_w/2,sc_h/3), all_sprites, collision_sprites) 
@@ -62,6 +82,7 @@ while running:
     #Draw
     display_surface.fill('black')
     all_sprites.draw(player.rect.center)
+    draw_ui()
     pygame.display.update()
 
 pygame.quit()
